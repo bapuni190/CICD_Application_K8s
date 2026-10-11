@@ -1,0 +1,29 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cicd-application
+  namespace: madu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cicd-application
+  template:
+    metadata:
+      labels:
+        app: cicd-application
+    spec:
+      containers:
+        - name: cicd-application
+          image: YOUR_DOCKERHUB_USERNAME/CICD_Application_K8s:latest
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
